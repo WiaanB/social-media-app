@@ -1,39 +1,15 @@
 require('dotenv').config()
 const { ApolloServer } = require('apollo-server')
-const gql = require('graphql-tag') // Dependency of 'apollo-server'
+const { gql } = require('apollo-server')
 const mongoose = require('mongoose')
 
 // Models
 const Post = require('./models/Post')
 const User = require('./models/User')
 
-// GrahQL types
-const typeDefs = gql`
-
-    type Post {
-        id: ID,
-        body: String!,
-        createdAt: String!,
-        username: String!
-    }
-
-    type Query {
-        getPosts: [Post]
-    }
-`
-// Query, Mutation, Subscription needs resolver to process logic to return the data
-const resolvers = {
-    Query: {
-        getPosts: async () => {
-            try {
-                const posts = await Post.find()
-                return posts
-            } catch (error) {
-                throw new Error(error)
-            }
-        }
-    }
-}
+// GrahQL Setup
+const typeDefs = require('./graphql') // Types that GraphQL will be using
+const resolvers = require('./graphql/resolvers') // Query, Mutation, Subscription needs resolver to process logic to return the data
 
 // Instantiating the Apollo Server
 const server = new ApolloServer({

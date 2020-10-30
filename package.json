@@ -4,7 +4,6 @@
   "description": "This is a basic social media app built for fun and to experiment with new technologies, spcifically GraphQL. I felt like React would compliment it nicely as I get plenty of Vue experience at work.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "serve": "nodemon  index.js"
   },
@@ -23,7 +22,9 @@
     "apollo-server": "^2.18.2",
     "dotenv": "^8.2.0",
     "graphql": "^15.4.0",
-    "mongoose": "^5.10.11",
+    "mongoose": "^5.10.11"
+  },
+  "devDependencies": {
     "nodemon": "^2.0.6"
   }
 }
