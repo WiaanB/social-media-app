@@ -1,10 +1,7 @@
+// Imports
 require('dotenv').config()
 const { ApolloServer } = require('apollo-server')
 const mongoose = require('mongoose')
-
-// Models
-const Post = require('./models/Post')
-const User = require('./models/User')
 
 // GrahQL Setup
 const typeDefs = require('./graphql') // Types that GraphQL will be using
@@ -13,7 +10,8 @@ const resolvers = require('./graphql/resolvers') // Query, Mutation, Subscriptio
 // Instantiating the Apollo Server
 const server = new ApolloServer({
     typeDefs,
-    resolvers
+    resolvers,
+    context: ({ req }) => ({ req }) // Gives access to the req object (res is also available)
 })
 
 // Setup the MongoDB database, and running the server
