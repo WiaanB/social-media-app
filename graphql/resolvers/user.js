@@ -46,7 +46,7 @@ module.exports = {
             }
         },
         // Logic to register a new user
-        async register(_, { registerInput: { username, email, password, confirmPassword } }, context, info) {
+        async register(_, { registerInput: { username, email, password, confirmPassword } }) {
             // Validation for the user input
             const { valid, errors } = validateRegisterInput(username, email, password, confirmPassword)
 
