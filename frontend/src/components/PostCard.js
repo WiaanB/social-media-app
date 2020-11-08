@@ -1,40 +1,31 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Card, Icon, Image, Label } from 'semantic-ui-react'
 import moment from 'moment'
 
+import LikeButton from './LikeButton'
+import DeleteButton from './DeleteButton'
+import { AuthContext } from '../context/auth'
+
 function PostCard({ post: { username, body, createdAt, id, likeCount, commentCount, likes }}) {
 
-    function likePost() {
-        console.log('Like post')
-    }
-
-    function comment() {
-        console.log('Comment post')
-    }
-
+    const { user } = useContext(AuthContext)
+    
     return (
         <Card fluid>
             <Card.Content>
                 <Image
                     floated='right'
                     size='mini'
-                    src='https://react.semantic-ui.com/images/avatar/large/molly.png'
+                    src="https://www.flaticon.com/svg/static/icons/svg/565/565431.svg"
                 />
                 <Card.Header>{username}</Card.Header>
                 <Card.Meta as={Link} to={`/posts/${id}`}>{moment(createdAt).fromNow()}</Card.Meta>
                 <Card.Description>{body}</Card.Description>
             </Card.Content>
             <Card.Content extra>
-            <Button as='div' labelPosition='right' onClick={likePost}>
-                <Button color='teal' basic>
-                    <Icon name='heart' />
-                </Button>
-                <Label basic color='teal' pointing='left'>
-                    {likeCount}
-                </Label>
-            </Button>
-            <Button as='div' labelPosition='right' onClick={comment}>
+            <LikeButton user={user} post={{ id, likes, likeCount }}/>
+            <Button labelPosition='right' as={Link} to={`/posts/${id}`}>
                 <Button color='blue' basic>
                     <Icon name='comments' />
                 </Button>
@@ -42,6 +33,7 @@ function PostCard({ post: { username, body, createdAt, id, likeCount, commentCou
                     {commentCount}
                 </Label>
             </Button>
+            {user && user.username === username && <DeleteButton postId={id} />}
             </Card.Content>
         </Card>
     )
