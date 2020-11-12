@@ -34,7 +34,7 @@ function PostForm() {
         <>
             <Form onSubmit={onSubmit} autoComplete="off">
                 <h2>create a post:</h2>
-                <Form.Field autoComplete={false}>
+                <Form.Field autoComplete="off">
                     <Form.Input 
                         placeholder='what is on your mind???'
                         name='body'
@@ -42,7 +42,7 @@ function PostForm() {
                         value={values.body}
                         error={error ? true:false}
                     />
-                    <Button type='submit' color='teal'>
+                    <Button type='submit' color='teal' disabled={values.body.trim() === ''}>
                         post
                     </Button>
                 </Form.Field>
