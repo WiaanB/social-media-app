@@ -4,5 +4,5 @@ This is a basic social media app built for fun and to experiment with new techno
 
 ## env files
 MONGO_DB = MongoDB connection string             
-PORT = Chosen port for the server          
+SERVER_PORT = Chosen port for the server          
 JWT_SECRET_KEY = Secret Key for the JWT signing

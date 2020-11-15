@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+    webapp:
+        container_name: social_media_app
+        restart: always
+        build: .
+        command: node index.js
+        ports:
+            - "5000:5000"
+        links:
+            - mongo
+        depends_on:
+            - "mongo"
+    mongo:
+        container_name: mongo
+        image: mongo
+        restart: always
+        volumes:
+            - ./db:/data/db
+        ports:
+            - "27017:27017"
+    adminmongo:
+        image: "mrvautin/adminmongo"
+        ports:
+            - "1234:1234"
